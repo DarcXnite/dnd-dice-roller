@@ -1,73 +1,58 @@
-import { useState } from 'react'
-import D4 from './components/d4'
+import { useState } from "react"
+import D4 from "./components/d4"
+import D6 from "./components/d6"
+import D8 from "./components/d8"
+import D10 from "./components/d10"
+import D12 from "./components/d12"
+import D20 from "./components/d20"
+import D100 from "./components/d100"
 
 function App() {
-  const [d4Count, setD4Count] = useState(3)
-  const [d6Count, setD6Count] = useState(3)
-  const [d8Count, setD8Count] = useState(3)
-  const [d10Count, setD10Count] = useState(3)
-  const [d12Count, setD12Count] = useState(3)
-  const [d20Count, setD20Count] = useState(3)
-  const [d100Count, setD100Count] = useState(3)
+	const [d4Count, setD4Count] = useState(0)
+	const [d6Count, setD6Count] = useState(0)
+	const [d8Count, setD8Count] = useState(0)
+	const [d10Count, setD10Count] = useState(0)
+	const [d12Count, setD12Count] = useState(0)
+	const [d20Count, setD20Count] = useState(0)
+	const [d100Count, setD100Count] = useState(0)
+	const [total, setTotal] = useState(0)
+	const [eachRoll, setEachRoll] = useState([])
 
-  const rng = sides => {
-    return Math.floor(Math.random() * sides) + 1
-  }
+	const rng = (sides) => {
+		let num = Math.floor(Math.random() * sides) + 1
+		eachRoll.push(num)
+		console.log(eachRoll)
+		return num
+	}
 
-  const d4 = () => {
-    for (let i = 1; i <= d4Count; i++) {
-      console.log(rng(4))
-    }
-  }
+	const rollDice = (dieCount, sides) => {
+		console.log(`rolling ${dieCount} d${sides}`)
+		let result = 0
+		for (let i = 1; i <= dieCount; i++) {
+			result += rng(sides)
+		}
+		setTotal(result)
+	}
 
-  const d6 = () => {
-    for (let i = 1; i <= d6Count; i++) {
-      console.log(rng(6))
-    }
-  }
-
-  const d8 = () => {
-    for (let i = 1; i <= d8Count; i++) {
-      console.log(rng(8))
-    }
-  }
-
-  const d10 = () => {
-    for (let i = 1; i <= d10Count; i++) {
-      console.log(rng(10))
-    }
-  }
-
-  const d12 = () => {
-    for (let i = 1; i <= d12Count; i++) {
-      console.log(rng(12))
-    }
-  }
-
-  const d20 = () => {
-    for (let i = 1; i <= d20Count; i++) {
-      console.log(rng(20))
-    }
-  }
-
-  const d100 = () => {
-    for (let i = 1; i <= d100Count; i++) {
-      console.log(rng(100))
-    }
-  }
-
-  const rollDice = () => {
-    console.log('rolling dice')
-    d4()
-  }
-
-  return (
-    <div>
-      <header>Hello World</header>
-      <button onClick={rollDice}>Roll!</button>
-      <D4 d4Count={d4Count} />
-    </div>
-  )
+	return (
+		<div>
+			<header>D&D Dice Roller</header>
+			<h2>
+				{`[${(eachRoll[0], eachRoll[1])}]`},{total}
+			</h2>
+			<D4 d4Count={d4Count} setD4Count={setD4Count} rollDice={rollDice} />
+			<D6 d6Count={d6Count} setD6Count={setD6Count} rollDice={rollDice} />
+			<D8 d8Count={d8Count} setD8Count={setD8Count} rollDice={rollDice} />
+			<D10 d10Count={d10Count} setD10Count={setD10Count} rollDice={rollDice} />
+			<D12 d12Count={d12Count} setD12Count={setD12Count} rollDice={rollDice} />
+			<D20 d20Count={d20Count} setD20Count={setD20Count} rollDice={rollDice} />
+			<D100
+				d100Count={d100Count}
+				setD100Count={setD100Count}
+				rollDice={rollDice}
+			/>
+		</div>
+	)
 }
 
 export default App
