@@ -24,6 +24,7 @@ function App() {
 		d20: false,
 		d100: false,
 	})
+	const [selectedDie, setSelectedDie] = useState("")
 	const [total, setTotal] = useState(0)
 	const [eachRoll, setEachRoll] = useState("")
 
@@ -57,7 +58,7 @@ function App() {
 				showDie[die] = false
 			}
 		}
-		console.log(showDie)
+		setSelectedDie(key)
 	}
 
 	return (
