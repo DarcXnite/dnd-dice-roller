@@ -1,11 +1,12 @@
 import { useState } from 'react'
 
-export default function d4({ d4Count }) {
-  const d4 = [1, 2, 3, 4]
+export default function d4({ d4Count, setD4Count, rollDice }) {
 
-  const rng = () => {
-    return Math.floor(Math.random() * 4)
-  }
 
-  return <div>d4</div>
+  return <div>
+    <p>How many d4 do you want to roll?</p>
+    <input min={0} type="number" value={d4Count} onChange={e => setD4Count(e.target.value)} />
+    <button onClick={() => rollDice(d4Count, 4)}> Roll!</button>
+
+  </div >
 }
