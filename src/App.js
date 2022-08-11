@@ -20,25 +20,33 @@ function App() {
 
 	const rng = (sides) => {
 		let num = Math.floor(Math.random() * sides) + 1
-		eachRoll.push(num)
-		console.log(eachRoll)
 		return num
 	}
 
 	const rollDice = (dieCount, sides) => {
 		console.log(`rolling ${dieCount} d${sides}`)
+		setEachRoll([])
 		let result = 0
 		for (let i = 1; i <= dieCount; i++) {
-			result += rng(sides)
+			eachRoll.push(rng(sides))
+		}
+		for (let j = 0; j < eachRoll.length; j++) {
+			result += eachRoll[j]
 		}
 		setTotal(result)
+		console.log(eachRoll)
+		setEachRoll(eachRoll.toString())
+	}
+
+	const arrResult = () => {
+		return `[${eachRoll.toString()}]`
 	}
 
 	return (
 		<div>
 			<header>D&D Dice Roller</header>
 			<h2>
-				{`[${(eachRoll[0], eachRoll[1])}]`},{total}
+				{`[${eachRoll}]`} = {total}
 			</h2>
 			<D4 d4Count={d4Count} setD4Count={setD4Count} rollDice={rollDice} />
 			<D6 d6Count={d6Count} setD6Count={setD6Count} rollDice={rollDice} />
